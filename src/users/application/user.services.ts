@@ -1,25 +1,19 @@
-import { IUserRepository } from './../domain/interface/IUser';
-import { IUser } from "../domain/interface/IUser";
+import { IUserRepository } from '../domain/interface/IUser';
+import { User } from '../domain/User';
 
-// A post request should not contain an id.
-export type UserCreationParams = Pick<IUser, "email" | "name" | "phoneNumbers">;
+export class UserService {
+  private productRepository: IUserRepository;
 
-export class UsersService implements IUserRepository {
-  public get(id: number, name?: string): IUser {
-    return {
-      id,
-      email: "jane@doe.com",
-      name: name ?? "Jane Doe",
-      status: "Happy",
-      phoneNumbers: [],
-    };
+  constructor(productRepository: IUserRepository){
+    this.productRepository = productRepository;
   }
 
-  public create(userCreationParams: UserCreationParams): IUser {
-    return {
-      id: Math.floor(Math.random() * 10000), // Random
-      status: "Happy",
-      ...userCreationParams,
-    };
+  public async createUser(name: string, email: string, phoneNumber: string[], status?: "Happy" | "Sad"): Promise<User> {
+    const user: User = new User(email, name, phoneNumber, status??"Happy");
+    return await this.productRepository.create(user);
+  };
+
+  public async get(id: string): Promise<User> {
+    return await this.productRepository.get(id);
   }
-};
+}
