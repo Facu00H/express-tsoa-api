@@ -5,7 +5,7 @@ interface MongoOptions extends ConnectOptions {
   useUnifiedTopology: boolean;
 }
 
-const MONGODB_URI = 'mongodb://localhost:27017/my-database';
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 const options: MongoOptions = {
   useNewUrlParser: true,
