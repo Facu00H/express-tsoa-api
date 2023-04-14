@@ -1,5 +1,7 @@
 import express, {json, urlencoded} from "express";
 import { RegisterRoutes } from "./routes";
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export const app = express();
 
