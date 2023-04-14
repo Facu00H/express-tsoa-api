@@ -1,5 +1,7 @@
+import { User } from '../User'
+
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
   name: string;
   status?: "Happy" | "Sad";
@@ -7,6 +9,6 @@ export interface IUser {
 };
 
 export interface IUserRepository {
-  get(id: number): IUser;
-  create(user: IUser): IUser;
+  get(id: string): Promise<User>;
+  create(user: User): Promise<User>;
 }
