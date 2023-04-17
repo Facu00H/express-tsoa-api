@@ -11,4 +11,5 @@ export interface IUser {
 export interface IUserRepository {
   get(id: string): Promise<User>;
   create(user: User): Promise<User>;
+  getAll(): Promise<User[]>;
 }
