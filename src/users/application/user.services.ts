@@ -16,4 +16,8 @@ export class UserService {
   public async get(id: string): Promise<User> {
     return await this.productRepository.get(id);
   }
+
+  public async getAll(): Promise<User[]> {
+    return await this.productRepository.getAll();
+  }
 }
