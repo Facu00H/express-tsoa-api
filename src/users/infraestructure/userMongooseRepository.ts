@@ -23,4 +23,12 @@ export class UserRepositoryMongo implements IUserRepository {
 
     return userCollection;
   }
+
+  async getAll(): Promise<User[]> {
+    const userCollection = await UserModel.find();
+    if (userCollection.length === 0) {
+      throw new Error("Users not found");
+    }
+    return userCollection;
+  }
 }
