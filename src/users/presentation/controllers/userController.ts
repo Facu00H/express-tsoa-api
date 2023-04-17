@@ -29,4 +29,9 @@ export class OrderController extends Controller {
   public async get( @Query('id') paramValue: string ): Promise<User> {
       return await this.userService.get(paramValue);
   }
+
+  @Get('/getAll')
+  public async getAll(): Promise<User[]> {
+      return await this.userService.getAll();
+  }
 }
