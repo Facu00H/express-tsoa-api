@@ -15,4 +15,5 @@ export interface IUserRepository {
   create(user: User): Promise<User>;
   getAll(): Promise<User[]>;
   update(id: string, user: IEditUser): Promise<User>;
+  delete(id: string): Promise<string>;
 }
