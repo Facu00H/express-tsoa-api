@@ -1,6 +1,16 @@
 import { User } from './../../domain/User';
 import { UserService } from "../../application/user.services";
-import { Body, Controller, Post, Route, Get, Query, Put, Path } from "tsoa";
+import {
+  Body,
+  Controller,
+  Post,
+  Route,
+  Get,
+  Query,
+  Put,
+  Path,
+  Delete
+} from "tsoa";
 import { UserRepositoryMongo } from "../../infraestructure/userMongooseRepository";
 import { IUserRepository } from 'src/users/domain/interface/IUser';
 
@@ -47,4 +57,11 @@ export class OrderController extends Controller implements IUserRepository{
       const { email, name, status } = requestBody;
       return await this.userService.update(userId, { email, name, status });
   }
+
+  @Delete('/deleteUser/{userId}')
+  public async delete(
+    @Path() userId: string ): Promise<string> {
+      const id = await this.userService.delete(userId);
+      return `Collection with id: ${id} has deleted`;
+    }
 }
