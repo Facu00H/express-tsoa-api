@@ -46,4 +46,13 @@ export class UserRepositoryMongo implements IUserRepository {
 
     return userCollection;
   }
+
+  async delete(id: string): Promise<string> {
+    const userCollection = await UserModel.findOneAndDelete({ id: id });
+    if (!userCollection) {
+      throw new Error("User not found");
+    }
+
+    return id;
+  }
 }
