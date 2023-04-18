@@ -24,4 +24,7 @@ export class UserService {
   public async update(id: string, user: IEditUser): Promise<User> {
     return await this.productRepository.update(id, user);
   }
+  public async delete(id: string): Promise<string> {
+    return await this.productRepository.delete(id);
+  }
 }
