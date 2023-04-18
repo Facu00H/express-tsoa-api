@@ -1,10 +1,11 @@
 import { User } from './../../domain/User';
 import { UserService } from "../../application/user.services";
-import { Body, Controller, Post, Route, Get, Query } from "tsoa";
+import { Body, Controller, Post, Route, Get, Query, Put, Path } from "tsoa";
 import { UserRepositoryMongo } from "../../infraestructure/userMongooseRepository";
+import { IUserRepository } from 'src/users/domain/interface/IUser';
 
 @Route('user')
-export class OrderController extends Controller {
+export class OrderController extends Controller implements IUserRepository{
   private readonly userService: UserService;
 
   constructor() {
@@ -33,5 +34,17 @@ export class OrderController extends Controller {
   @Get('/getAll')
   public async getAll(): Promise<User[]> {
       return await this.userService.getAll();
+  }
+
+  @Put('/updateUser/{userId}')
+  public async update(
+    @Path() userId: string,
+    @Body() requestBody: {
+      email: string;
+      name: string;
+      status?: "Happy" | "Sad";
+    } ): Promise<User> {
+      const { email, name, status } = requestBody;
+      return await this.userService.update(userId, { email, name, status });
   }
 }
