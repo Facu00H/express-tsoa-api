@@ -1,4 +1,4 @@
-import { IUserRepository } from '../domain/interface/IUser';
+import { IEditUser, IUserRepository } from '../domain/interface/IUser';
 import { User } from '../domain/User';
 
 export class UserService {
@@ -19,5 +19,9 @@ export class UserService {
 
   public async getAll(): Promise<User[]> {
     return await this.productRepository.getAll();
+  }
+
+  public async update(id: string, user: IEditUser): Promise<User> {
+    return await this.productRepository.update(id, user);
   }
 }
